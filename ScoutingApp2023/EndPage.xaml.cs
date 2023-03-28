@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using static System.Net.Mime.MediaTypeNames;
+using ScoutingApp2023.Components;
 
 namespace ScoutingApp2023;
 
@@ -15,80 +15,35 @@ public partial class EndPage : ContentPage
         // There is no data if you haven't even navigated to the other tabs yet...
         if (MauiProgram.ViewModel.TeleopStack.Children == null || MauiProgram.ViewModel.AutoStack.Children == null)
         {
-            message.Text = "Error: You haven't used the Autonomous and Telop tabs yet!";
+            message.Text = "Error: You haven't used the Autonomous and Teleop tabs yet!";
             message.IsVisible = true;
             return;
         }
 
         // Save data
-        int autoCones = 0;
-		int autoCubes = 0;
-		int teleopCones = 0;
-		int teleopCubes = 0;
-        int autoHighCone = 0;
-        int autoHighCube = 0;
-        int autoMidCone = 0;
-        int autoMidCube = 0;
-        int autoLowCone = 0;
-        int autoLowCube = 0;
-        int teleopHighCone = 0;
-        int teleopHighCube = 0;
-        int teleopMidCone = 0;
-        int teleopMidCube = 0;
-        int teleopLowCone = 0;
-        int teleopLowCube = 0;
-        foreach (FlexLayout flex in MauiProgram.ViewModel.AutoStack.Children)
-		{
-            ImageButton button1 = (ImageButton)flex.Children[0];
-            ImageButton button2 = (ImageButton)flex.Children[1];
-            ImageButton picker = (ImageButton)flex.Children[2];
-            bool isCone = button1.Source.ToString().Contains("cone");
-			if ((bool)button1.GetValue(MauiProgram.ButtonEnabled))
-			{
-                int i = isCone ? autoHighCone++ : autoHighCube++;
-            }
-			if ((bool)button2.GetValue(MauiProgram.ButtonEnabled))
-			{
-                int i2 = isCone ? autoMidCone++ : autoMidCube++;
-            }
-			if ((BaseState)picker.GetValue(MauiProgram.BaseState) == BaseState.Cone)
-			{
-				autoLowCone++;
-			}
-            else if ((BaseState)picker.GetValue(MauiProgram.BaseState) == BaseState.Cube)
-            {
-                autoLowCube++;
-            }
-        }
-        autoCones = autoLowCone + autoMidCone + autoHighCone;
-        autoCubes = autoLowCube + autoMidCube + autoHighCube;
-        foreach (FlexLayout flex in MauiProgram.ViewModel.TeleopStack.Children)
-        {
-            ImageButton button1 = (ImageButton)flex.Children[0];
-            ImageButton button2 = (ImageButton)flex.Children[1];
-            ImageButton picker = (ImageButton)flex.Children[2];
-            bool isCone = button1.Source.ToString().Contains("cone");
-            if ((bool)button1.GetValue(MauiProgram.ButtonEnabled))
-            {
-                int i = isCone ? teleopHighCone++ : teleopHighCube++;
-            }
-            if ((bool)button2.GetValue(MauiProgram.ButtonEnabled))
-            {
-                int i2 = isCone ? teleopMidCone++ : teleopMidCube++;
-            }
-            if ((BaseState)picker.GetValue(MauiProgram.BaseState) == BaseState.Cone)
-            {
-                teleopLowCone++;
-            }
-            else if ((BaseState)picker.GetValue(MauiProgram.BaseState) == BaseState.Cube)
-            {
-                teleopLowCube++;
-            }
-        }
-        teleopCones = teleopLowCone + teleopMidCone + teleopHighCone;
-        teleopCubes = teleopLowCube + teleopMidCube + teleopHighCube;
+        Count(MauiProgram.ViewModel.AutoStack.Children,
+              out int autoHighCone,
+              out int autoMidCone,
+              out int autoLowCone,
+              out int autoHighCube,
+              out int autoMidCube,
+              out int autoLowCube,
+              out int autoCones,
+              out int autoCubes);
+
+        Count(MauiProgram.ViewModel.TeleopStack.Children,
+              out int teleopHighCone,
+              out int teleopMidCone,
+              out int teleopLowCone,
+              out int teleopHighCube,
+              out int teleopMidCube,
+              out int teleopLowCube,
+              out int teleopCones,
+              out int teleopCubes);
+
         int autoPoints = 6 * autoHighCone + 6 * autoHighCube + 4 * autoMidCone + 4 * autoMidCube + 3 * autoLowCone + 3 * autoLowCube;
         int teleopPoints = 5 * teleopHighCone + 5 * teleopHighCube + 3 * teleopMidCone + 3 * teleopMidCube + 2 * teleopLowCone + 2 * teleopLowCube;
+        
         if (MauiProgram.ViewModel.AutoMobility.IsChecked)
         {
             autoPoints += 3;
@@ -165,23 +120,12 @@ public partial class EndPage : ContentPage
 
 		foreach (FlexLayout flex in Enumerable.Concat(MauiProgram.ViewModel.AutoStack.Children, MauiProgram.ViewModel.TeleopStack.Children))
 		{
-			ImageButton button1 = (ImageButton)flex.Children[0];
-			button1.SetValue(MauiProgram.ButtonEnabled, false);
-            ImageButton button2 = (ImageButton)flex.Children[1];
-            button2.SetValue(MauiProgram.ButtonEnabled, false);
-			if (button1.Source.ToString().Contains("cone"))
-			{
-                button1.Source = "graycone.png";
-                button2.Source = "graycone.png";
-            }
-			else
-			{
-                button1.Source = "graycube.png";
-                button2.Source = "graycube.png";
-            }
-			ImageButton picker = (ImageButton)flex.Children[2];
-            picker.Source = "cube_cone_cycle_none.png";
-            picker.SetValue(MauiProgram.BaseState, BaseState.None);
+			ToggleButton button1 = (ToggleButton)flex.Children[0];
+            button1.Enabled = false;
+            ToggleButton button2 = (ToggleButton)flex.Children[1];
+            button2.Enabled = false;
+			CycleButton picker = (CycleButton)flex.Children[2];
+            picker.State = BaseState.None;
         }
 		MauiProgram.ViewModel.AutoMobility.IsChecked = false;
 		MauiProgram.ViewModel.AutoDocked.IsChecked = false;
@@ -193,6 +137,37 @@ public partial class EndPage : ContentPage
 		noMove.IsChecked = false;
 		comments.Text = string.Empty;
         Shell.Current.GoToAsync("//MainPage");
+    }
+
+    private static void Count(IList<IView> children, out int highCone, out int midCone, out int lowCone, out int highCube, out int midCube, out int lowCube, out int cones, out int cubes)
+    {
+        highCone = midCone = lowCone = highCube = midCube = lowCube = 0;
+        foreach (FlexLayout flex in children)
+        {
+            ToggleButton button1 = (ToggleButton)flex.Children[0];
+            ToggleButton button2 = (ToggleButton)flex.Children[1];
+            CycleButton picker = (CycleButton)flex.Children[2];
+            bool isCone = button1.ButtonType == "cone";
+            if (button1.Enabled)
+            {
+                int i = isCone ? highCone++ : highCube++;
+            }
+            if (button2.Enabled)
+            {
+                int i2 = isCone ? midCone++ : midCube++;
+            }
+            if (picker.State == BaseState.Cone)
+            {
+                lowCone++;
+            }
+            else if (picker.State == BaseState.Cube)
+            {
+                lowCube++;
+            }
+        }
+
+        cones = lowCone + midCone + highCone;
+        cubes = lowCube + midCube + highCube;
     }
 
     private void OnExport(object sender, EventArgs e)

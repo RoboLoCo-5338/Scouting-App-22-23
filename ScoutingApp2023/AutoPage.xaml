@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:controls="clr-namespace:ScoutingApp2023"
+             xmlns:components="clr-namespace:ScoutingApp2023.Components"
              x:Class="ScoutingApp2023.AutoPage"
              Title="Autonomous">
     <ScrollView>
@@ -15,202 +15,67 @@
                 <FlexLayout
                     x:Name="flex1"
                     Padding="0" >
-                    <ImageButton
-                    x:Name="cone1"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnConeClick"
-                    Source="graycone.png" />
-                    <ImageButton 
-                    x:Name="cone2"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnConeClick"
-                    Source="graycone.png" />
-                    <ImageButton
-                    x:Name="base1"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnBaseClick"
-                    Source="cube_cone_cycle_none.png" />
+                    <components:ConeButton x:Name="cone1" />
+                    <components:ConeButton x:Name="cone2" />
+                    <components:CycleButton x:Name="base1" />
                 </FlexLayout>
                 <FlexLayout
                 x:Name="flex2"
                 Padding="0" >
-                    <ImageButton
-                    x:Name="cube1"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnCubeClick"
-                    Source="graycube.png" />
-                    <ImageButton 
-                    x:Name="cube2"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnCubeClick"
-                    Source="graycube.png" />
-                    <ImageButton
-                    x:Name="base2"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnBaseClick"
-                    Source="cube_cone_cycle_none.png" />
+                    <components:CubeButton x:Name="cube1" />
+                    <components:CubeButton x:Name="cube2" />
+                    <components:CycleButton x:Name="base2" />
                 </FlexLayout>
                 <FlexLayout
                 x:Name="flex3"
                 Padding="0" >
-                    <ImageButton
-                    x:Name="cone3"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnConeClick"
-                    Source="graycone.png" />
-                    <ImageButton 
-                    x:Name="cone4"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnConeClick"
-                    Source="graycone.png" />
-                    <ImageButton
-                    x:Name="base3"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnBaseClick"
-                    Source="cube_cone_cycle_none.png" />
+                    <components:ConeButton x:Name="cone3" />
+                    <components:ConeButton x:Name="cone4" />
+                    <components:CycleButton x:Name="base3" />
                 </FlexLayout>
 
                 <FlexLayout
                 x:Name="flex4"
                 Padding="0" >
-                    <ImageButton
-                    x:Name="cone5"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnConeClick"
-                    Source="graycone.png" />
-                    <ImageButton 
-                    x:Name="cone6"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnConeClick"
-                    Source="graycone.png" />
-                    <ImageButton
-                    x:Name="base4"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnBaseClick"
-                    Source="cube_cone_cycle_none.png" />
+                    <components:ConeButton x:Name="cone5" />
+                    <components:ConeButton x:Name="cone6" />
+                    <components:CycleButton x:Name="base4" />
                 </FlexLayout>
                 <FlexLayout
                 x:Name="flex5"
                 Padding="0" >
-                    <ImageButton
-                    x:Name="cube3"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnCubeClick"
-                    Source="graycube.png" />
-                    <ImageButton 
-                    x:Name="cube4"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnCubeClick"
-                    Source="graycube.png" />
-                    <ImageButton
-                    x:Name="base5"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnBaseClick"
-                    Source="cube_cone_cycle_none.png" />
+                    <components:CubeButton x:Name="cube3" />
+                    <components:CubeButton x:Name="cube4" />
+                    <components:CycleButton x:Name="base5" />
                 </FlexLayout>
                 <FlexLayout
                 x:Name="flex6"
                 Padding="0" >
-                    <ImageButton
-                    x:Name="cone7"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnConeClick"
-                    Source="graycone.png" />
-                    <ImageButton 
-                    x:Name="cone8"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnConeClick"
-                    Source="graycone.png" />
-                    <ImageButton
-                    x:Name="base6"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnBaseClick"
-                    Source="cube_cone_cycle_none.png" />
+                    <components:ConeButton x:Name="cone7" />
+                    <components:ConeButton x:Name="cone8" />
+                    <components:CycleButton x:Name="base6" />
                 </FlexLayout>
 
                 <FlexLayout
                 x:Name="flex7"
                 Padding="0" >
-                    <ImageButton
-                    x:Name="cone9"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnConeClick"
-                    Source="graycone.png" />
-                    <ImageButton 
-                    x:Name="cone10"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnConeClick"
-                    Source="graycone.png" />
-                    <ImageButton
-                    x:Name="base7"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnBaseClick"
-                    Source="cube_cone_cycle_none.png" />
+                    <components:ConeButton x:Name="cone9" />
+                    <components:ConeButton x:Name="cone10" />
+                    <components:CycleButton x:Name="base7" />
                 </FlexLayout>
                 <FlexLayout
                 x:Name="flex8"
                 Padding="0" >
-                    <ImageButton
-                    x:Name="cube5"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnCubeClick"
-                    Source="graycube.png" />
-                    <ImageButton 
-                    x:Name="cube6"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnCubeClick"
-                    Source="graycube.png" />
-                    <ImageButton
-                    x:Name="base8"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnBaseClick"
-                    Source="cube_cone_cycle_none.png" />
+                    <components:CubeButton x:Name="cube5" />
+                    <components:CubeButton x:Name="cube6" />
+                    <components:CycleButton x:Name="base8" />
                 </FlexLayout>
                 <FlexLayout
                 x:Name="flex9"
                 Padding="0" >
-                    <ImageButton
-                    x:Name="cone11"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnConeClick"
-                    Source="graycone.png" />
-                    <ImageButton 
-                    x:Name="cone12"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnConeClick"
-                    Source="graycone.png" />
-                    <ImageButton
-                    x:Name="base9"
-                    WidthRequest="55"
-                    HeightRequest="55"
-                    Clicked="OnBaseClick"
-                    Source="cube_cone_cycle_none.png" />
+                    <components:ConeButton x:Name="cone11" />
+                    <components:ConeButton x:Name="cone12" />
+                    <components:CycleButton x:Name="base9" />
                 </FlexLayout>
             </VerticalStackLayout>
             <HorizontalStackLayout

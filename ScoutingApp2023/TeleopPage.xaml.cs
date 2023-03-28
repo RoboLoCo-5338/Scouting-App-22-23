@@ -21,8 +21,4 @@ public partial class TeleopPage : ContentPage
             flex.Direction = MauiProgram.ViewModel.FlowDirection;
         }
     }
-
-    private void OnConeClick(object sender, EventArgs e) => MauiProgram.OnConeClick(sender, e);
-    private void OnCubeClick(object sender, EventArgs e) => MauiProgram.OnCubeClick(sender, e);
-    private void OnBaseClick(object sender, EventArgs e) => MauiProgram.OnBaseClick(sender, e);
 }

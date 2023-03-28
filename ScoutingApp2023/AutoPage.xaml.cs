@@ -14,7 +14,6 @@ public partial class AutoPage : ContentPage
         MauiProgram.ViewModel.AutoMobility = mobility;
         MauiProgram.ViewModel.AutoDocked = docked;
         MauiProgram.ViewModel.AutoEngaged = engaged;
-
     }
 
     private void OnNavigated(object sender, NavigatedToEventArgs e)
@@ -24,8 +23,4 @@ public partial class AutoPage : ContentPage
             flex.Direction = MauiProgram.ViewModel.FlowDirection;
         }
     }
-
-    private void OnConeClick(object sender, EventArgs e) => MauiProgram.OnConeClick(sender, e);
-    private void OnCubeClick(object sender, EventArgs e) => MauiProgram.OnCubeClick(sender, e);
-    private void OnBaseClick(object sender, EventArgs e) => MauiProgram.OnBaseClick(sender, e);
 }
