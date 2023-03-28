@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ScoutingApp2023.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Start">
+            <HorizontalStackLayout
+                Spacing="10">
+                <Label
+                    Text="Team Number: "
+                    VerticalOptions="Center" />
+                <Entry
+                    x:Name="teamNumberEntry"
+                    MaxLength="4"
+                    Text=""
+                    Keyboard="Numeric"
+                    VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout
+                Spacing="10">
+                <Label
+                    Text="Scouter Name: "
+                    VerticalOptions="Center" />
+                <Entry
+                    x:Name="scoutNameEntry"
+                    Text=""
+                    VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout
+                Spacing="10">
+                <Label
+                    Text="Alliance Side: "
+                    VerticalOptions="Center" />
+                <Picker
+                    x:Name="side"
+                    SelectedIndexChanged="OnAlliancePickerSelectedIndexChanged"
+                    SelectedIndex="-1">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Left</x:String>
+                            <x:String>Right</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout
+                Spacing="10">
+                <Label
+                    Text="Match Number: "
+                    VerticalOptions="Center" />
+                <Entry
+                    x:Name="matchNumberEntry"
+                    Text=""
+                    Keyboard="Numeric"
+                    VerticalOptions="Center" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

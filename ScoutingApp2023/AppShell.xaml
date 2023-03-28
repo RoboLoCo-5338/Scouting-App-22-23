@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ScoutingApp2023.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ScoutingApp2023"
+    Shell.FlyoutBehavior="Disabled">
+
+    <TabBar>
+        <Tab Title="Home">
+            <ShellContent
+                Title="Home"
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage" />
+        </Tab>
+
+        <Tab Title="Autonomous">
+            <ShellContent
+                Title="Autonomous"
+                ContentTemplate="{DataTemplate local:AutoPage}"
+                Route="AutoPage" />
+        </Tab>
+        
+        <Tab Title="Teleop">
+            <ShellContent
+                Title="Home"
+                ContentTemplate="{DataTemplate local:TeleopPage}"
+                Route="TeleopPage" />
+        </Tab>
+
+        <Tab Title="Finish">
+            <ShellContent
+                Title="Home"
+                ContentTemplate="{DataTemplate local:EndPage}"
+                Route="EndPage" />
+        </Tab>
+    </TabBar>
+</Shell>

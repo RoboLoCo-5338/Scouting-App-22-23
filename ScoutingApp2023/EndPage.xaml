@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ScoutingApp2023.EndPage"
+             Title="Finish">
+    <ScrollView>
+        <VerticalStackLayout
+                Spacing="25"
+                Padding="30,0"
+                VerticalOptions="Start">
+            <HorizontalStackLayout
+                    Spacing="10">
+                <Label
+                    Text="Defense Bot?: "
+                    VerticalOptions="Center" />
+                <CheckBox
+                    x:Name="defense"
+                    VerticalOptions="Center" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout
+                    Spacing="10">
+                <Label
+                    Text="Robot Did Not Move?: "
+                        VerticalOptions="Center" />
+                <CheckBox
+                    x:Name="noMove"
+                    VerticalOptions="Center" />
+            </HorizontalStackLayout>
+            <Label Text="Additional Comments:" />
+            <Editor x:Name="comments" Text="" AutoSize="TextChanges" />
+            <Button
+                Text="Submit"
+                Clicked="OnSubmit" />
+            <Button
+                Text="Export"
+                Clicked="OnExport" />
+            <Label x:Name="message" Text="" IsVisible="false" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
