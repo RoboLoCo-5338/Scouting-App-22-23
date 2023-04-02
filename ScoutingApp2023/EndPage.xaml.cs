@@ -43,40 +43,49 @@ public partial class EndPage : ContentPage
 
         int autoPoints = 6 * autoHighCone + 6 * autoHighCube + 4 * autoMidCone + 4 * autoMidCube + 3 * autoLowCone + 3 * autoLowCube;
         int teleopPoints = 5 * teleopHighCone + 5 * teleopHighCube + 3 * teleopMidCone + 3 * teleopMidCube + 2 * teleopLowCone + 2 * teleopLowCube;
+        int autoCharging = 0;
+        int teleopCharging = 0;
         
         if (MauiProgram.ViewModel.AutoMobility.IsChecked)
         {
-            autoPoints += 3;
+            autoCharging += 3;
         }
         if (MauiProgram.ViewModel.AutoDocked.IsChecked)
         {
-            autoPoints += 8;
+            autoCharging += 8;
         }
         if (MauiProgram.ViewModel.AutoEngaged.IsChecked && MauiProgram.ViewModel.AutoDocked.IsChecked)
         {
-            autoPoints += 4;
+            autoCharging += 4;
         }
         else if (MauiProgram.ViewModel.AutoEngaged.IsChecked)
         {
-            autoPoints += 12;
+            autoCharging += 12;
         }
         if (MauiProgram.ViewModel.TeleopParked.IsChecked)
         {
-            teleopPoints += 2;
+            teleopCharging += 2;
         }
         if (MauiProgram.ViewModel.TeleopDocked.IsChecked)
         {
-            teleopPoints += 6;
+            teleopCharging += 6;
         }
         if (MauiProgram.ViewModel.TeleopEngaged.IsChecked && MauiProgram.ViewModel.TeleopDocked.IsChecked)
         {
-            teleopPoints += 4;
+            teleopCharging += 4;
         }
         else if (MauiProgram.ViewModel.TeleopEngaged.IsChecked)
         {
-            teleopPoints += 10;
+            teleopCharging += 10;
         }
+
+        autoPoints += autoCharging;
+        teleopPoints += teleopCharging;
         int points = autoPoints + teleopPoints;
+        int pointsWithoutEndgame = points - autoCharging - teleopCharging;
+        int cones = autoCones + teleopCones;
+        int cubes = autoCubes + teleopCubes;
+        int totalPieces = cones + cubes;
         List<string> data = new()
         {
             MauiProgram.ViewModel.TeamNumberEntry.Text,
@@ -106,7 +115,14 @@ public partial class EndPage : ContentPage
             teleopLowCube.ToString(),
             autoPoints.ToString(),
             teleopPoints.ToString(),
+            autoCharging.ToString(),
+            teleopCharging.ToString(),
+            cones.ToString(),
+            cubes.ToString(),
+            totalPieces.ToString(),
+            pointsWithoutEndgame.ToString(),
             points.ToString(),
+            MauiProgram.ViewModel.TeamNumberEntry.Text,
             defense.IsChecked.ToString().ToUpper(),
             noMove.IsChecked.ToString().ToUpper(),
             $"\"{comments.Text}\""
@@ -185,7 +201,7 @@ public partial class EndPage : ContentPage
         }
         using FileStream outputStream = File.OpenWrite(targetFile);
         using StreamWriter streamWriter = new(outputStream);
-        string text = "teamNumber,scouterName,matchNumber,autoMobility,autoDock,autoEngage,autoCone,autoCube,teleopPark,teleopDock,teleopEngage,teleopCone,teleopCube,autoHighCone,autoHighCube,autoMidCone,autoMidCube,autoLowCone,autoLowCube,teleopHighCone,teleopHighCube,teleopMidCone,teleopMidCube,teleopLowCone,teleopLowCube,Auto Points,Teleop Points,points,Defense,Did not move,comments\n";
+        string text = "teamNumber,scouterName,matchNumber,autoMobility,autoDock,autoEngage,autoCone,autoCube,teleopPark,teleopDock,teleopEngage,teleopCone,teleopCube,autoHighCone,autoHighCube,autoMidCone,autoMidCube,autoLowCone,autoLowCube,teleopHighCone,teleopHighCube,teleopMidCone,teleopMidCube,teleopLowCone,teleopLowCube,Auto Points,Teleop Points,Auto Charging,Teleop Charging,Total Cones,Total Cube,Total Game Pieces,Points without Endgame,points,Team Number 2,Defense,Did not move,comments\n";
         foreach (List<string> data in MauiProgram.Data)
         {
             foreach (string entry in data)
